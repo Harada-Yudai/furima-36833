@@ -7,13 +7,11 @@
 | email                      | string | null: false, unique: true |
 | encrypted_password         | string | null: false               |
 | nickname                   | string | null: false               |
-| last_name                  | text   | null: false               |
-| first_name                 | text   | null: false               |
-| last_kana                  | text   | null: false               |
-| first_kana                 | text   | null: false               |
-| birth_year                 | string | null: false               |
-| birth_month                | string | null: false               |
-| birth_day                  | string | null: false               |
+| last_name                  | string | null: false               |
+| first_name                 | string | null: false               |
+| last_kana                  | string | null: false               |
+| first_kana                 | string | null: false               |
+| birthday                   | date   | null: false               |
 
 ### Association
 
@@ -26,12 +24,12 @@
 | ------------- | ----------- | ------------------------------- |
 | name          | string      | null: false                     |
 | info          | text        | null: false                     |
-| category      | string      | null: false                     |
-| status        | string      | null: false                     |
-| ship_pay      | string      | null: false                     |
-| ship_from     | string      | null: false                     |
-| ship_day      | string      | null: false                     |
-| price         | string      | null: false                     |
+| category_id   | integer     | null: false                     |
+| status_id     | integer     | null: false                     |
+| ship_pay_id   | integer     | null: false                     |
+| ship_from_id  | integer     | null: false                     |
+| ship_day_id   | integer     | null: false                     |
+| price         | integer     | null: false                     |
 | user          | references  | null: false, foreign_key: true  |
 
 ### Association
@@ -55,15 +53,15 @@
 
 ## sendinfos テーブル
 
-| Column      | Type       | Options                        |
-| ----------- | ---------- | ------------------------------ |
-| postcode    | string     | null: false                    |
-| prefecture  | string     | null: false                    |
-| city        | string     | null: false                    |
-| block       | string     | null: false                    |
-| building    | string     | null: false                    |
-| phone_num   | string     | null: false                    |
-| buylog      | references | null: false, foreign_key: true |
+| Column        | Type       | Options                        |
+| ------------- | ---------- | ------------------------------ |
+| postcode      | string     | null: false                    |
+| prefecture_id | integer    | null: false                    |
+| city          | string     | null: false                    |
+| block         | string     | null: false                    |
+| building      | string     |                                |
+| phone_num     | string     | null: false                    |
+| buylog        | references | null: false, foreign_key: true |
 
 ### Association
 
