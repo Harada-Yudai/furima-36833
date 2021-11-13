@@ -57,7 +57,7 @@ RSpec.describe Item, type: :model do
     it '価格は、¥300~¥9,999,999の間のみ保存可能であること' do
       @item.price = 299
       @item.valid?
-      expect(@item.errors.full_messages).to include("Price を正しく入力してください")
+      expect(@item.errors.full_messages).to include('Price を正しく入力してください')
     end
   end
 end
