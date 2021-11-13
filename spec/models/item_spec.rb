@@ -54,10 +54,20 @@ RSpec.describe Item, type: :model do
       @item.valid?
       expect(@item.errors.full_messages).to include("Ship day can't be blank")
     end
-    it '価格は、¥300~¥9,999,999の間のみ保存可能であること' do
+    it '価格は、¥300以上のみ保存可能であること' do
       @item.price = 299
       @item.valid?
       expect(@item.errors.full_messages).to include('Price を正しく入力してください')
+    end
+    it '価格は半角数値のみ保存可能であること。' do
+      @item.price = "aaaaaa"
+      @item.valid?
+      expect(@item.errors.full_messages).to include('Price を正しく入力してください')
+    end
+    it 'ユーザーが紐付いていなければ投稿できない' do
+      @item.user = nil
+      @item.valid?
+      expect(@item.errors.full_messages).to include("User must exist")
     end
   end
 end
