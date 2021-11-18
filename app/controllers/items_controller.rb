@@ -10,7 +10,7 @@ class ItemsController < ApplicationController
   end
 
   def create
-    @item = Item.new(prototype_params)
+    @item = Item.new(item_params)
     if @item.save
       redirect_to root_path
     else
@@ -22,9 +22,24 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
   end
 
+  def edit
+    @item = Item.find(params[:id])
+    redirect_to action: :index unless current_user.id == @item.user_id
+  end
+
+  def update
+    @item = Item.find(params[:id])
+    @item.update(item_params)
+    if @item.save
+      redirect_to item_path
+    else
+      render :edit
+    end
+  end
+
   private
 
-  def prototype_params
+  def item_params
     params.require(:item).permit(:image, :name, :info, :category_id, :status_id, :ship_pay_id, :prefecture_id, :ship_day_id,
                                  :price).merge(user_id: current_user.id)
   end
