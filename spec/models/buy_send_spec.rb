@@ -65,6 +65,11 @@ RSpec.describe BuySend, type: :model do
         @buy_send.valid?
         expect(@buy_send.errors.full_messages).to include("Phone num is not a number")
       end
+      it "tokenが空では登録できないこと" do
+        @buy_send.token = nil
+        @buy_send.valid?
+        expect(@buy_send.errors.full_messages).to include("Token can't be blank")
+      end
     end
   end
 end
