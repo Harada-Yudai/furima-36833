@@ -53,19 +53,19 @@ RSpec.describe BuySend, type: :model do
       it '電話番号は、10桁以上11桁以内の半角数値のみ保存可能なこと' do
         @buy_send.phone_num = '111111111'
         @buy_send.valid?
-        expect(@buy_send.errors.full_messages).to include("Phone num is too short (minimum is 10 characters)")
+        expect(@buy_send.errors.full_messages).to include('Phone num is too short (minimum is 10 characters)')
       end
       it '電話番号は、10桁以上11桁以内の半角数値のみ保存可能なこと' do
         @buy_send.phone_num = '111111111111'
         @buy_send.valid?
-        expect(@buy_send.errors.full_messages).to include("Phone num is too long (maximum is 11 characters)")
+        expect(@buy_send.errors.full_messages).to include('Phone num is too long (maximum is 11 characters)')
       end
       it '電話番号は、半角数値のみ保存可能なこと' do
         @buy_send.phone_num = 'aaaaaaaaaaa'
         @buy_send.valid?
-        expect(@buy_send.errors.full_messages).to include("Phone num is not a number")
+        expect(@buy_send.errors.full_messages).to include('Phone num is not a number')
       end
-      it "tokenが空では登録できないこと" do
+      it 'tokenが空では登録できないこと' do
         @buy_send.token = nil
         @buy_send.valid?
         expect(@buy_send.errors.full_messages).to include("Token can't be blank")
