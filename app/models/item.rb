@@ -10,9 +10,10 @@ class Item < ApplicationRecord
             numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999, message: 'を正しく入力してください' }
   validates :image, presence: true
 
-  # has_one :buylog
+
   belongs_to :user
   has_one_attached :image
+  has_one :buylog
 
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :category
