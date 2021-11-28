@@ -1,7 +1,9 @@
 class OrdersController < ApplicationController
+  before_action :authenticate_user!
   def index
     @buy_send = BuySend.new
     @item = Item.find(params[:item_id])
+    redirect_to root_path unless @item.buylog.nil?
   end
 
   def create
