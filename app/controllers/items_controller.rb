@@ -22,8 +22,8 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    redirect_to action: :index unless current_user.id == @item.user_id
-    redirect_to action: :index unless @item.buylog.nil?
+    redirect_to action: :index unless current_user.id == @item.user_id ||  @item.buylog.nil?
+    # redirect_to action: :index unless @item.buylog.nil?
   end
 
   def update

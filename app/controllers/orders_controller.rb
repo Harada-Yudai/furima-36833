@@ -3,14 +3,11 @@ class OrdersController < ApplicationController
   before_action :set_item, only: [:index, :create]
   def index
     @buy_send = BuySend.new
-    set_item
-    redirect_to root_path unless @item.buylog.nil?
-    redirect_to root_path if current_user.id == @item.user_id
+    redirect_to root_path unless @item.buylog.nil? || current_user.id != @item.user_id
   end
 
   def create
     @buy_send = BuySend.new(sendinfo_params)
-    set_item
     if @buy_send.valid?
       pay_item
       @buy_send.save
