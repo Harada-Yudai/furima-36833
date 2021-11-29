@@ -35,6 +35,11 @@ RSpec.describe BuySend, type: :model do
         @buy_send.valid?
         expect(@buy_send.errors.full_messages).to include("Prefecture can't be blank")
       end
+      it '都道府県が空では保存できないこと' do
+        @buy_send.prefecture_id = nil
+        @buy_send.valid?
+        expect(@buy_send.errors.full_messages).to include("Prefecture can't be blank")
+      end
       it '市区町村が必須であること' do
         @buy_send.city = ''
         @buy_send.valid?
