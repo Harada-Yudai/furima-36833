@@ -1,14 +1,16 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_item, only: [:index, :create]
   def index
     @buy_send = BuySend.new
-    @item = Item.find(params[:item_id])
+    set_item
     redirect_to root_path unless @item.buylog.nil?
+    redirect_to root_path if current_user.id == @item.user_id
   end
 
   def create
     @buy_send = BuySend.new(sendinfo_params)
-    @item = Item.find(params[:item_id])
+    set_item
     if @buy_send.valid?
       pay_item
       @buy_send.save
@@ -31,5 +33,9 @@ class OrdersController < ApplicationController
     Payjp::Charge.create(
       amount: @item.price, card: @buy_send.token, currency: 'jpy'
     )
+  end
+
+  def set_item
+    @item = Item.find(params[:item_id])
   end
 end
